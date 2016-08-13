@@ -1,0 +1,3 @@
+[submodule "practicetimer"]
+    path = wwwroot/
+    url = git@github.com:silesky/practicetimer.git
