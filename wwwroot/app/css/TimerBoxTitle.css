@@ -1,0 +1,10 @@
+/* in TimerBox */
+.TimerBoxTitle-container {
+ 	flex-grow: 1;
+}
+
+
+/* Title Size */
+input.TimerBoxTitle-input {
+  font-size: 3em;
+}

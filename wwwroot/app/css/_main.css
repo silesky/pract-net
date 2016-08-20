@@ -1,0 +1,66 @@
+
+
+html {
+  font-size: 66.7%;
+}
+
+.board {
+  padding-top: 15em;
+}
+
+header {
+    position: fixed;
+    z-index: 999;
+    top: 0%;
+    width: 100%;
+    display: flex;
+}
+
+@media (min-width: 1070px) {
+  .timerBox {
+    margin: 1%;
+    max-width: 700px;
+}
+  .board span {
+    display: flex;
+    justify-content: space-around;
+  }
+}		
+
+.timerbox-enter {
+  opacity: 0.01;
+}
+
+.timerbox-enter.timerbox-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.timerbox-leave {
+  opacity: 1;
+}
+
+.timerbox-leave.timerbox-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+::-webkit-input-placeholder {
+  opacity: 0.5;
+  font-size: 0.75em;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  opacity: 0.5;
+  font-size: 0.75em;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  opacity: 0.5;
+  font-size: 0.75em;
+}
+
+:-ms-input-placeholder {  
+  opacity: 0.5;
+  font-size: 0.75em;
+}

@@ -1,0 +1,35 @@
+
+.BoardBtnControls-Container {
+    background-color: rgba(59, 31, 56, 0.91);
+    width: 35em;
+    display: flex;
+    align-items: center;
+    height: 15em;
+    justify-content: space-around;
+}
+/* made padding in pixels bc in percents, the playpause animation makes the buttons twitch */
+.BoardBtnControls-Container i {
+    color: #ff4081;
+    display: inline;
+    cursor: pointer;
+    padding: 0 35px;
+}
+.BoardBtnControls-Container i:hover {
+  color: white;
+
+}
+
+.BoardBtnControls {
+    font-size: 4em;
+
+}
+
+/* if paused, the pause button should not display */
+.pauseBtnCtrl.paused {}
+
+
+/* if paused, the play button should display */
+
+.playBtnCtrl.paused {}
+
+.playBtnCtrl.notpaused {}

@@ -1,0 +1,12 @@
+.BoardCountDownTotal-Container {
+	color: black;
+	font-size: 15em;
+	align-items: center;
+	display: flex;
+	flex-grow: 1;
+	}
+.BoardCountDownTotal-text {
+	font-family: Inconsolata;
+	text-shadow: 2px 2px #ff4081;
+	margin: auto;
+}
