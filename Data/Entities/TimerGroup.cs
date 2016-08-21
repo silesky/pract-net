@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PracticeTimer.Entities
+namespace PracticeTimer.Data.Entities
 {
     public class TimerGroup {
     

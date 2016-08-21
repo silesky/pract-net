@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PracticeTimer.Entities;
+using PracticeTimer.Data.Entities;
 
 namespace PracticeTimer.Data {
     public class PracticeTimerContext : DbContext {

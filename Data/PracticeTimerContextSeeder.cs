@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Timer = PracticeTimer.Entities.Timer;
+using Timer = PracticeTimer.Data.Entities.Timer;
 
 namespace PracticeTimer.Data
 {

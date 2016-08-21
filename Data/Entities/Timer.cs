@@ -1,6 +1,6 @@
 using System;
 
-namespace PracticeTimer.Entities {
+namespace PracticeTimer.Data.Entities {
     public class Timer {
         public Guid Id {get;set;}
         public string Title {get;set;}
