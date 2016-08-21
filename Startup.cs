@@ -64,9 +64,7 @@ namespace WebApplication
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
 
-                using (var dbContext = new PracticeTimerContext(new DbContextOptions<PracticeTimerContext>())) {
-                    PracticeTimerContextSeeder.Seed(dbContext);
-                }
+                
             }
             else
             {
@@ -85,6 +83,9 @@ namespace WebApplication
                 RequestPath = new PathString("")
             });
 
+            using (var dbContext = new PracticeTimerContext(new DbContextOptions<PracticeTimerContext>())) {
+                PracticeTimerContextSeeder.Seed(dbContext);
+            }
 
             app.UseIdentity();
 

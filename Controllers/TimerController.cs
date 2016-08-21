@@ -14,6 +14,14 @@ namespace PracticeTimer.Controllers {
             return new ObjectResult(timer);
         }
 
+        [HttpGet("")]
+        public IActionResult GetAll () {
+            Console.WriteLine("hit get all timers");
+            var timers = Context.Timers.ToList();
+            
+            return new ObjectResult(timers);
+        }
+
         
 
     }
