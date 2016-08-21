@@ -2,12 +2,15 @@ using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using PracticeTimer.Data;
+using WebApplication.Data;
+using WebApplication.Models;
 
 namespace WebApplication
 {
@@ -39,9 +42,9 @@ namespace WebApplication
             services.AddDbContext<PracticeTimerContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            // services.AddIdentity<ApplicationUser, IdentityRole>()
-            //     .AddEntityFrameworkStores<ApplicationDbContext>()
-            //     .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc();
 
@@ -61,6 +64,10 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
+
+                using (var dbContext = new PracticeTimerContext(new DbContextOptions<PracticeTimerContext>())) {
+                    PracticeTimerContextSeeder.Seed(dbContext);
+                }
             }
             else
             {
