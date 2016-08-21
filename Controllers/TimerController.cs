@@ -9,7 +9,7 @@ namespace PracticeTimer.Controllers {
         [HttpGet("{id}")]
         public IActionResult GetTimer(int id) {
             var timer = Context.Timers.FirstOrDefault(t => t.Id == id);
-
+            
 
             return new ObjectResult(timer);
         }
