@@ -8,6 +8,7 @@ namespace PracticeTimer.Controllers {
         public PracticeTimerContext Context {get;set;} 
 
         public PracticeTimerController () {
+            
             Context = new PracticeTimerContext(new DbContextOptions<PracticeTimerContext>());
         }
 
