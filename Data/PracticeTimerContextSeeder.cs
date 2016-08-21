@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Timer = PracticeTimer.Entities.Timer;
 
-namespace PracticeTimer.Data {
+namespace PracticeTimer.Data
+{
     public static class PracticeTimerContextSeeder {
         public static void Seed(PracticeTimerContext context) {
             var timers = new List<Timer> {

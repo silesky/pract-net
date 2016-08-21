@@ -7,9 +7,13 @@ namespace PracticeTimer.Controllers {
     [Route("api/[controller]")]
     public class TimerGroupController : PracticeTimerController {
 
-        public IActionResult Get(Guid id) {
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
             var entity = Context.TimerGroups.FirstOrDefault(tg => tg.Id == id);
-        } 
+
+            return new ObjectResult(entity);
+        }
 
     }
 
