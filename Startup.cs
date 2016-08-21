@@ -9,8 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using PracticeTimer.Data;
-using WebApplication.Data;
-using WebApplication.Models;
+using PracticeTimer.Data.Entities;
 
 namespace WebApplication
 {
@@ -43,7 +42,7 @@ namespace WebApplication
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<PracticeTimerContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
