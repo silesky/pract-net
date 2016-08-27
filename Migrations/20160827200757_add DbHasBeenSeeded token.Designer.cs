@@ -8,9 +8,10 @@ using PracticeTimer.Data;
 namespace practnet.Migrations
 {
     [DbContext(typeof(PracticeTimerContext))]
-    partial class PracticeTimerContextModelSnapshot : ModelSnapshot
+    [Migration("20160827200757_add DbHasBeenSeeded token")]
+    partial class addDbHasBeenSeededtoken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
