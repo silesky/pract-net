@@ -42,6 +42,16 @@ namespace PracticeTimer.Controllers {
 
 
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id) {
+            var entity = Context.Timers.First(t => t.Id == id);
+
+            Context.Timers.Remove(entity);
+            Context.SaveChanges();
+
+            return new ObjectResult(new {Success = true});
+        }
         
 
     }
