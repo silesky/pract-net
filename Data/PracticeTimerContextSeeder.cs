@@ -11,13 +11,41 @@ namespace PracticeTimer.Data
             
             var timerGroup = new TimerGroup {
                 Id = Guid.NewGuid(),
+
                 Title = "Sample Timer Group",
+
             };
 
             var timers = new List<Timer> {
-                new Timer{Id = Guid.NewGuid(), Time=2, Title = "eat", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup},
-                new Timer{Id = Guid.NewGuid(), Time=4, Title = "love", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup},
-                new Timer{Id = Guid.NewGuid(), Time=6, Title = "pray", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup}
+                new Timer{Id = Guid.NewGuid(),
+                 Time=2,
+                 Title = "eat",
+                 Ticking = false,
+                 StartTime = 20,
+                 Paused = true,
+                 TimerGroup = timerGroup,
+                 Order = 0,
+                },
+
+                new Timer{Id = Guid.NewGuid(),
+                 Time=4,
+                 Title = "love",
+                 Ticking = false,
+                 StartTime = 20,
+                 Paused = true,
+                 TimerGroup = timerGroup,
+                 Order = 1,
+                },
+
+                new Timer{Id = Guid.NewGuid(),
+                 Time=6,
+                 Title = "pray",
+                 Ticking = false,
+                 StartTime = 20,
+                 Paused = true,
+                 TimerGroup = timerGroup,
+                 Order = 2
+                },
             };
         
             foreach (var t in timers) context.Timers.Add(t);
