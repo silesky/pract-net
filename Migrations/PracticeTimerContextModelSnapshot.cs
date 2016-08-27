@@ -15,9 +15,9 @@ namespace practnet.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
 
-            modelBuilder.Entity("PracticeTimer.Entities.Timer", b =>
+            modelBuilder.Entity("PracticeTimer.Data.Entities.Timer", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Order");
@@ -30,7 +30,7 @@ namespace practnet.Migrations
 
                     b.Property<int>("Time");
 
-                    b.Property<Guid>("TimerGroupId");
+                    b.Property<int>("TimerGroupId");
 
                     b.Property<string>("Title");
 
@@ -41,9 +41,9 @@ namespace practnet.Migrations
                     b.ToTable("Timers");
                 });
 
-            modelBuilder.Entity("PracticeTimer.Entities.TimerGroup", b =>
+            modelBuilder.Entity("PracticeTimer.Data.Entities.TimerGroup", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Title");
@@ -53,9 +53,9 @@ namespace practnet.Migrations
                     b.ToTable("TimerGroups");
                 });
 
-            modelBuilder.Entity("PracticeTimer.Entities.Timer", b =>
+            modelBuilder.Entity("PracticeTimer.Data.Entities.Timer", b =>
                 {
-                    b.HasOne("PracticeTimer.Entities.TimerGroup", "TimerGroup")
+                    b.HasOne("PracticeTimer.Data.Entities.TimerGroup", "TimerGroup")
                         .WithMany("Timers")
                         .HasForeignKey("TimerGroupId")
                         .OnDelete(DeleteBehavior.Cascade);

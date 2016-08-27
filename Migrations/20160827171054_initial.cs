@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace practnet.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,8 @@ namespace practnet.Migrations
                 name: "TimerGroups",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Autoincrement", true),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -24,13 +25,14 @@ namespace practnet.Migrations
                 name: "Timers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Autoincrement", true),
                     Order = table.Column<int>(nullable: false),
                     Paused = table.Column<bool>(nullable: false),
                     StartTime = table.Column<int>(nullable: false),
                     Ticking = table.Column<bool>(nullable: false),
                     Time = table.Column<int>(nullable: false),
-                    TimerGroupId = table.Column<Guid>(nullable: false),
+                    TimerGroupId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
