@@ -10,14 +10,14 @@ namespace PracticeTimer.Data
             Console.WriteLine("Adding Seed Data...");
             
             var timerGroup = new TimerGroup {
-                Id = 0,
+                Id = Guid.NewGuid(),
                 Title = "Sample Timer Group",
             };
 
             var timers = new List<Timer> {
-                new Timer{Id = 1, Time=2, Title = "eat", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup},
-                new Timer{Id = 2, Time=4, Title = "love", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup},
-                new Timer{Id = 3, Time=6, Title = "pray", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup}
+                new Timer{Id = Guid.NewGuid(), Time=2, Title = "eat", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup},
+                new Timer{Id = Guid.NewGuid(), Time=4, Title = "love", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup},
+                new Timer{Id = Guid.NewGuid(), Time=6, Title = "pray", Ticking = false, StartTime = 20, Paused = true, TimerGroup = timerGroup}
             };
         
             foreach (var t in timers) context.Timers.Add(t);

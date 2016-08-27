@@ -17,7 +17,7 @@ namespace practnet.Migrations
 
             modelBuilder.Entity("PracticeTimer.Data.Entities.Timer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Order");
@@ -30,7 +30,7 @@ namespace practnet.Migrations
 
                     b.Property<int>("Time");
 
-                    b.Property<int>("TimerGroupId");
+                    b.Property<Guid>("TimerGroupId");
 
                     b.Property<string>("Title");
 
@@ -43,7 +43,7 @@ namespace practnet.Migrations
 
             modelBuilder.Entity("PracticeTimer.Data.Entities.TimerGroup", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Title");

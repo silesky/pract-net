@@ -4,7 +4,7 @@ using System;
 // 
 namespace PracticeTimer.DataTransferObjects {
     public class TimerDto {
-        public int Id {get;set;}
+        public Guid Id {get;set;}
         public string Title {get;set;}
         public int Time {get;set;}
         public bool Ticking {get;set;}
@@ -12,7 +12,7 @@ namespace PracticeTimer.DataTransferObjects {
         public bool Paused {get;set;}
         public int Order {get;set;}
         
-        public int TimerGroupId {get; set;}
+        public Guid TimerGroupId {get; set;}
 
 
     

@@ -8,8 +8,8 @@ using PracticeTimer.Data;
 namespace practnet.Migrations
 {
     [DbContext(typeof(PracticeTimerContext))]
-    [Migration("20160827171054_initial")]
-    partial class initial
+    [Migration("20160827192230_inital igration")]
+    partial class initaligration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace practnet.Migrations
 
             modelBuilder.Entity("PracticeTimer.Data.Entities.Timer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Order");
@@ -31,7 +31,7 @@ namespace practnet.Migrations
 
                     b.Property<int>("Time");
 
-                    b.Property<int>("TimerGroupId");
+                    b.Property<Guid>("TimerGroupId");
 
                     b.Property<string>("Title");
 
@@ -44,7 +44,7 @@ namespace practnet.Migrations
 
             modelBuilder.Entity("PracticeTimer.Data.Entities.TimerGroup", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Title");

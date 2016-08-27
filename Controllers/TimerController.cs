@@ -9,7 +9,7 @@ namespace PracticeTimer.Controllers {
     public class TimerController : PracticeTimerController {
         
         [HttpGet("{id}")]
-        public IActionResult GetTimer(int id) {
+        public IActionResult GetTimer(Guid id) {
             var timer = Context.Timers.FirstOrDefault(t => t.Id == id);
             
 
@@ -39,12 +39,10 @@ namespace PracticeTimer.Controllers {
                 Context.Timers.Add(timerEntity);
                 Context.SaveChanges();    
                 return new ObjectResult(new {success=true});
-
-
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id) {
+        public IActionResult Delete(Guid id) {
             var entity = Context.Timers.First(t => t.Id == id);
 
             Context.Timers.Remove(entity);
