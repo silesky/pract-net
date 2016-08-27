@@ -9,6 +9,8 @@ namespace PracticeTimer.Data {
         {
             
         }
+
+        // consumes the timerEntity Object, which is an object we constructed from values in the db
         public DbSet<Timer> Timers {get;set;}
         public DbSet<TimerGroup> TimerGroups {get;set;}
         

@@ -8,13 +8,13 @@ namespace PracticeTimer.Controllers {
     public class TimerGroupController : PracticeTimerController {
 
         [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        public IActionResult Get(int id)
         {
             var entity = Context.TimerGroups.FirstOrDefault(tg => tg.Id == id);
 
             return new ObjectResult(entity);
         }
-
+        // getTotalTime
     }
 
 }

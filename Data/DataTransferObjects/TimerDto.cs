@@ -1,7 +1,9 @@
 using System;
+// this is our viewmodel for our entities. It's going 
 
-namespace PracticeTimer.Data.Entities {
-    public class Timer {
+// 
+namespace PracticeTimer.DataTransferObjects {
+    public class TimerDto {
         public int Id {get;set;}
         public string Title {get;set;}
         public int Time {get;set;}
@@ -12,7 +14,7 @@ namespace PracticeTimer.Data.Entities {
         
         public int TimerGroupId {get; set;}
 
-        public virtual TimerGroup TimerGroup {get; set;}
+
     
         }
 }

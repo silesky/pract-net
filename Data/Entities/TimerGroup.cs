@@ -5,7 +5,7 @@ namespace PracticeTimer.Data.Entities
 {
     public class TimerGroup {
     
-        public Guid Id {get ;set;}
+        public int Id {get ;set;}
         public string Title {get; set;}
         public virtual List<Timer> Timers {get;set;}
 
