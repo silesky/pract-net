@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PracticeTimer.Data;
 
 namespace PracticeTimer.Controllers {
-    public class PracticeTimerController : Controller {
+    public abstract class PracticeTimerController : Controller {
         
         public PracticeTimerContext Context {get;set;} 
 
