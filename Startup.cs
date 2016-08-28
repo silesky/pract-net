@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 using PracticeTimer.Data;
 using PracticeTimer.Data.Entities;
 
@@ -46,7 +47,12 @@ namespace WebApplication
                 .AddEntityFrameworkStores<PracticeTimerContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc()
+            .AddJsonOptions(x=> 
+                {
+                    x.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
+            
 
             // Add application services.
             //services.AddTransient<IEmailSender, AuthMessageSender>();
