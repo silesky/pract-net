@@ -5,9 +5,9 @@
   [Data Transfer Object (for sending JSON)]
           |
     [Controllers]
-  ... minimal, glue code, just your
+   minimal, glue code, just your
       implementation of the behaviors
-  ... getTimers(userID);
+   getTimers(userID);
           |
   [ Business Layer ]
   ... utility functions,
