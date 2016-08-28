@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -84,7 +85,15 @@ namespace WebApplication
             });
 
             using (var dbContext = new PracticeTimerContext(new DbContextOptions<PracticeTimerContext>())) {
-                PracticeTimerContextSeeder.Seed(dbContext);
+                
+                if (dbContext.NeedsSeeding()) {
+                    Console.WriteLine("Database needs seeding.");
+                    PracticeTimerContextSeeder.Seed(dbContext);
+                    dbContext.NeedsSeeding(false);
+                }
+                else {
+                    Console.WriteLine("Database does not need seeding");
+                }
             }
 
             app.UseIdentity();
