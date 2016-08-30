@@ -1,10 +1,15 @@
 using System;
-// this is our viewmodel for our entities. It's going 
 
-// 
 namespace PracticeTimer.DataTransferObjects {
-    public class TimerDto {
+    
+    public class OutputTimerDto : BaseTimerDto {
         public Guid Id {get;set;}
+    }
+
+    public class RequestToCreateTimerDto : BaseTimerDto {
+    }
+    public abstract class BaseTimerDto {
+      
         public string Title {get;set;}
         public int Time {get;set;}
         public bool Ticking {get;set;}

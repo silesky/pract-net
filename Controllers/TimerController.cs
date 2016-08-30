@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using PracticeTimer.Data.Entities;
 using PracticeTimer.DataTransferObjects;
@@ -24,12 +25,16 @@ namespace PracticeTimer.Controllers
         public IActionResult GetAll()
         {
             Console.WriteLine("# hit get all timers");
-            var timers = Context.Timers.ToList().Select(toDto).ToList();
+            var timers = Context.Timers
+                        .Select((t) => new {
+                            Id = t.Id, 
+                        }).ToList();
 
             return new ObjectResult(timers);
         }
 
         private TimerDto toDto(Timer timerEntity) {
+            // we should break down toDto 
             var dto = new TimerDto();
             dto.Id = timerEntity.Id;
             dto.Order = timerEntity.Order;
@@ -43,9 +48,15 @@ namespace PracticeTimer.Controllers
         } 
         // TimerDto is found in the bottom of the http request
 
-        private Timer toEntity(TimerDto dto, Timer savedEntity = null) {
-            var entity = (savedEntity != null) ? savedEntity:  new Timer();
-            if (entity.Id == Guid.Empty) entity.Id = dto.Id;
+        private Timer toEntity(RequestToCreateTimerDto dto) {
+            var entity = new Timer(){
+                Id = Guid.NewGuid(),
+                Order = dto.Order
+                // we want data transfer objects to be specialized
+
+
+            }; 
+            entity.Id = Guid.NewGuid();
             entity.Order = dto.Order;
             entity.Paused = dto.Paused;
             entity.Time = dto.Time;
@@ -57,7 +68,7 @@ namespace PracticeTimer.Controllers
         } 
 
         [HttpPost("")]
-        public IActionResult Create([FromBody] TimerDto dto)
+        public IActionResult Create([FromBody] RequestToCreateTimerDto dto)
         {
             // when you hit the put route, you get {success: true} if it suceeded
             // http://localhost:5000/api/timer/f46020bc-e1c0-4225-a04f-20415156b3a5
@@ -91,5 +102,6 @@ namespace PracticeTimer.Controllers
 
             return new ObjectResult(new { Success = true });
         }
+   
     }
 }
