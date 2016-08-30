@@ -16,7 +16,7 @@ namespace PracticeTimer.Controllers
         {
             var timer = Context.Timers.FirstOrDefault(t => t.Id == id);
             var timerDto = toDto(timer);
-            Console.WriteLine("get individual timer hit!");
+            Console.WriteLine("### individual timer hit!");
             
             return new ObjectResult(timerDto);
         }
@@ -24,18 +24,25 @@ namespace PracticeTimer.Controllers
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            Console.WriteLine("# hit get all timers");
+            Console.WriteLine("### hit get all timers!");
             var timers = Context.Timers
                         .Select((t) => new {
-                            Id = t.Id, 
+                            Id = t.Id,
+                            Order = t.Order,
+                            Paused = t.Paused,
+                            Time = t.Time,
+                            Ticking = t.Ticking,
+                            Title = t.Title,
+                            TimerGroupId = t.TimerGroupId,
+                            StartTime = t.StartTime,
                         }).ToList();
 
             return new ObjectResult(timers);
         }
 
-        private TimerDto toDto(Timer timerEntity) {
+        private OutputTimerDto toDto(Timer timerEntity) {
             // we should break down toDto 
-            var dto = new TimerDto();
+            var dto = new OutputTimerDto();
             dto.Id = timerEntity.Id;
             dto.Order = timerEntity.Order;
             dto.Paused = timerEntity.Paused;
@@ -50,26 +57,22 @@ namespace PracticeTimer.Controllers
 
         private Timer toEntity(RequestToCreateTimerDto dto) {
             var entity = new Timer(){
-                Id = Guid.NewGuid(),
-                Order = dto.Order
-                // we want data transfer objects to be specialized
-
-
+            Id = Guid.NewGuid(),
+            Order = dto.Order,
+            Paused = dto.Paused,
+            Time = dto.Time,
+            Ticking = dto.Ticking,
+            Title = dto.Title,
+            TimerGroup = Context.TimerGroups.FirstOrDefault(tg => tg.Id == dto.TimerGroupId),
+            StartTime = dto.StartTime
             }; 
-            entity.Id = Guid.NewGuid();
-            entity.Order = dto.Order;
-            entity.Paused = dto.Paused;
-            entity.Time = dto.Time;
-            entity.Ticking = dto.Ticking;
-            entity.Title = dto.Title;
-            entity.TimerGroup = Context.TimerGroups.FirstOrDefault(tg => tg.Id == dto.TimerGroupId);
-            entity.StartTime = dto.StartTime;
             return entity;
         } 
 
         [HttpPost("")]
         public IActionResult Create([FromBody] RequestToCreateTimerDto dto)
         {
+        
             // when you hit the put route, you get {success: true} if it suceeded
             // http://localhost:5000/api/timer/f46020bc-e1c0-4225-a04f-20415156b3a5
             // private variables are camelCase
@@ -92,16 +95,19 @@ namespace PracticeTimer.Controllers
             return new ObjectResult(new { Success = true });
         }
 
-        [HttpPost("{id:guid}")]
-        public IActionResult Update([FromBody] TimerDto dto)
-        {
-            var entity = Context.Timers.First(t => t.Id == dto.Id);
+        // we want to create a new data 
+        // [HttpPost("{id:guid}")]
+        // public IActionResult Update([FromBody] RequestToCreateTimerDto dto)
+        // {
+        //     var entity = Context.Timers.First(t => t.Id == dto.);
             
-            entity = toEntity(dto, entity);
-            Context.SaveChanges();
+        //     entity = toEntity(dto, entity);
+        //     Context.SaveChanges();
 
-            return new ObjectResult(new { Success = true });
-        }
+        //     return new ObjectResult(new { Success = true });
+        // }
    
     }
 }
+
+
