@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using PracticeTimer.Data.Entities;
 using PracticeTimer.DataTransferObjects;
 
 namespace PracticeTimer.Controllers {
@@ -22,7 +23,7 @@ namespace PracticeTimer.Controllers {
                             StartTime = t.StartTime,
                             Paused = t.Paused,
                             Ticking = t.Ticking,
-                            TimerGroupId = t.TimerGroupId
+                            TimerGroupId = t.TimerGroupId,
                         }).ToList(),       
                 })
                 .ToList();
@@ -38,6 +39,27 @@ namespace PracticeTimer.Controllers {
             return new ObjectResult(entity);
         }
 
+        [HttpPut("")]
+        public IActionResult Create(RequestToCreateTimerGroupDto dto) {
+            var entity = new TimerGroup() {
+                Id = Guid.NewGuid(),
+                Title = dto.Title,
+                Timers = dto.Timers.Select(t => new Timer() {
+                    Id = Guid.NewGuid(),
+                    Title = t.Title,
+                    Order = t.Order,
+                    Time = t.Time,
+                    Ticking = t.Ticking,
+                    Paused = t.Paused,
+                    StartTime = t.StartTime,
+                }).ToList()
+            };
+
+            Context.TimerGroups.Add(entity);
+            Context.SaveChanges();
+
+            return new ObjectResult(new {Success = true});
+        }
         
         // getTotalTime
     }

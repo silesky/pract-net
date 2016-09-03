@@ -13,6 +13,9 @@ namespace PracticeTimer.DataTransferObjects {
 
         public List<RequestToCreateTimerDto> Timers { get; set; }
 
+        public RequestToCreateTimerGroupDto() {
+            Timers = new List<RequestToCreateTimerDto>();
+        }
     }
 
     public abstract class BaseTimerGroupDto {
