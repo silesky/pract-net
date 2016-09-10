@@ -4,11 +4,11 @@ namespace PracticeTimer.Controllers {
 
     public class PublicController : PracticeTimerController {
 
-        [HttpGet("")]
-        public IActionResult Login() {
+        // [HttpGet("")]
+        // public IActionResult Login() {
 
-            return new ViewResult("Login", );
-        }
+        //     return new ViewResult("Login", );
+        // }
 
     }
 
