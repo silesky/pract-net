@@ -1,12 +1,22 @@
 /*  grab the stored state object from LocalStorage, use it to hydrate the state (so timer
     timer settings will persist on page load). */
-import { getStateFromLS, isEmpty } from '../util';
-let stateFromLS = getStateFromLS();
+import { getStateFromLS, isEmpty, get } from '../util';
+
+
+
+
+console.log("hello...")
+
 /*  if there's nothing in localStorage, be sure to
     set a default initialState or we'll get a state.map is undefined error. */
-let initialState = (stateFromLS) ?  stateFromLS : [{ id: 1, time: 5, title: '', ticking: false, startTime: 5, pause: true }];
 
-const reducer = function(state = initialState, action) {
+
+
+
+
+
+
+const reducer = function(state = [], action) {
     let _index;
     let _objEl;
     let _individualTimerObjEl;
@@ -48,6 +58,9 @@ const reducer = function(state = initialState, action) {
       },
     };
     switch (action.type) {
+      case 'HYDRATE':
+      return action.data; 
+      
       case 'CLEAR':
       return [{ id: util.getNextId(), time: 5, title: '', ticking: false, startTime: 5, pause: true }];
       case 'ADD_TIMER':

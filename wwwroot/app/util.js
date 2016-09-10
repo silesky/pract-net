@@ -1,6 +1,31 @@
 
 // given the state and the current id, grab the next id;
 
+export const get = (filepath) => {
+  return new Promise((resolve, reject) => {
+  // new request object
+    let req = new XMLHttpRequest();
+    // req.open(method, filepath, true <-- async by default)
+    req.open('GET', filepath);
+    // event listener
+    req.onload = () => {
+      // 4 = request over, responsedata is finished downloading
+      if (req.status >= 200) {
+        resolve(JSON.parse(req.response));
+      }
+    }
+    req.onerror = () => {
+      // gets passed to the error object
+      reject({
+        statusText: req.statusText
+       });
+    }
+      // query the server and handle the result
+    req.send(null);
+    });
+ }
+ 
+
 export const storeStateInLS = (obj) => {
   if (typeof obj === 'object' || 'array') {
     // convert to string bc stupid localstorage only supports plain string
@@ -10,16 +35,12 @@ export const storeStateInLS = (obj) => {
 };
 
 export const getStateFromLS = () => {
-  let newState;
   const string = localStorage.getItem('storedState');
   const stateObj = JSON.parse(string);
-  if (stateObj) {
-    newState = stateObj.map((el) => {
-    el.pause = true;
-    return el;
-  });
-  }
-  return newState;
+  if (!stateObj) return Promise.resolve(null);
+  
+
+  return Promise.resolve(stateObj);
 };
 
 // used in TimerBoxCountDown

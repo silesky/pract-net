@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 // stores the state... hydration happens in _Reducer
-import { storeStateInLS } from './util';
-import FB from './firebaseconfig'; 
+import { storeStateInLS,getStateFromLS, get } from './util';
+
+
 
 import thunk from 'redux-thunk';
 import reducer from './reducers/_Reducer';
@@ -15,17 +16,27 @@ import reducer from './reducers/_Reducer';
 *   let store= createStoreMW(todoApp)
 */
 
+const defaultState = [{ id: 1, time: 5, title: '', ticking: false, startTime: 5, pause: true }];
+const getStateFromDB = () => get('/api/timer');
+
+const getInitialState = () => {
+    return Promise.all([getStateFromDB(), getStateFromLS()]).then(([dbState, lsState]) => {
+      if (dbState) return dbState;
+      if (lsState) return lsState;
+      return defaultState;
+    });
+  };
 
 
 
 const compose = ((a, b) => (c) => a(b(c)));
 
 const configureStore = () => {
-    const store = createStore(reducer, compose(
+  const mw = compose(
       applyMiddleware(thunk),
       window.devToolsExtension ? window.devToolsExtension() : f => f
-    ));
-    return store;
+    );
+    return createStore(reducer, mw);
   };
 
 const store = configureStore();
@@ -33,34 +44,16 @@ const store = configureStore();
 // without anon function, I get error 'expected listener to be a function'
 store.subscribe(() => storeStateInLS(store.getState()));
 
+
+getInitialState().then((state) => {
+  console.log(state);
+  store.dispatch({type: 'HYDRATE', data: state});
+})
+
+
 export default store;
 
 
-const FBref = FB.database().ref();
 
-const getData = () => {
-	FBref.on('value', function(snapshot) {
-		console.log(snapshot.val());
-	});
-	console.log(FBref);
-};
-
-getData();
-
-
-const writeUserData = (obj) => {
-  FBref.set(obj);
-}
-
-writeUserData(store.getState());
-
-
-// function writeUserData(userId, name, email, imageUrl) {
-//   firebase.database().ref('users/' + userId).set({
-//     username: name,
-//     email: email,
-//     profile_picture : imageUrl
-//   });
-// }
 
 
