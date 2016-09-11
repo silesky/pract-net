@@ -40,19 +40,19 @@ module.exports = function() {
         expect(_nextTimer).to.exist;
       });
     });
-    describe('pausePlay()', function() {
+    describe('pausedPlay()', function() {
       it('all timers should start paused', function() {
-      expect(store.getState()[0].pause).to.be.true;      
+      expect(store.getState()[0].paused).to.be.true;      
       });
       it('when timer is ticking, paused should be set to false', function() {
         store.dispatch(actionCreators.startTicking(1));
         expect(store.getState()[0].ticking).to.be.true;
-        expect(store.getState()[0].pause).to.be.false;      
+        expect(store.getState()[0].paused).to.be.false;      
       });
        it('while timer is ticking and pauseplay is clicked: paused should be set to true ', function() {
-         store.dispatch(actionCreators.pausePlay());
+         store.dispatch(actionCreators.pausedPlay());
         expect(store.getState()[0].ticking).to.be.true;
-        expect(store.getState()[0].pause).to.be.true;      
+        expect(store.getState()[0].paused).to.be.true;      
       });
     });
   });

@@ -81,7 +81,7 @@ export const findIdWhereTrue = (state, prop) => {
 
 // expect all timers to have a paused value of true
 export const everythingIsPaused = (state) => {
-  let arr = state.map((el) => el.pause).filter((el) =>!el);
+  let arr = state.map((el) => el.paused).filter((el) =>!el);
   return !arr.length; // if array has things, return false
 };
 

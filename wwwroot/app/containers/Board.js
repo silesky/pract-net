@@ -27,7 +27,7 @@ const Board = React.createClass({
 
 // if there is an id, it means that paused is true somewhere, so isPaused evals to true.
   isItPaused: function() {
-    return !!findIdWhereTrue(this.props.state, 'pause');
+    return !!findIdWhereTrue(this.props.state, 'paused');
   },
   render() {
 ;
@@ -39,7 +39,7 @@ const Board = React.createClass({
            
             <BoardBtnControls className={ this.isItPaused() ? 'paused' : 'notpaused' }
               onBoardBtnPlayClick={ () => { this.props.actions.startTicking(nextInLine(this.props.state)); } }
-              onBoardBtnPauseClick={ () => { this.props.actions.pausePlay(); } }
+              onBoardBtnPauseClick={ () => { this.props.actions.pausedPlay(); } }
               onBoardBtnResetClick={ () => { this.props.actions.resetAll(); } }
             />
           </div>

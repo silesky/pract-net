@@ -16,7 +16,7 @@ import reducer from './reducers/_Reducer';
 *   let store= createStoreMW(todoApp)
 */
 
-const defaultState = [{ id: 1, time: 5, title: '', ticking: false, startTime: 5, pause: true }];
+const defaultState = [{ id: 1, time: 5, title: '', ticking: false, startTime: 5, paused: true }];
 const getStateFromDB = () => get('/api/timer');
 
 const getInitialState = () => {

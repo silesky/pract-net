@@ -62,9 +62,9 @@ const reducer = function(state = [], action) {
       return action.data; 
       
       case 'CLEAR':
-      return [{ id: util.getNextId(), time: 5, title: '', ticking: false, startTime: 5, pause: true }];
+      return [{ id: util.getNextId(), time: 5, title: '', ticking: false, startTime: 5, paused: true }];
       case 'ADD_TIMER':
-      return [...state, { id: util.getNextId(), time: 5, title: '', ticking: false, startTime: 5, pause: true }];
+      return [...state, { id: util.getNextId(), time: 5, title: '', ticking: false, startTime: 5, paused: true }];
       // save the start time of all of the timers...(except for the one )
       case 'SAVE_START_TIMES':
       let stateWithSavedStartTimes = state.map((el) => {
@@ -100,7 +100,7 @@ const reducer = function(state = [], action) {
 
       case 'TOGGLE_PAUSEPLAY':
       _individualTimerObjEl = util.getCurrentObjEl();
-      _individualTimerObjEl.pause = !_individualTimerObjEl.pause;
+      _individualTimerObjEl.paused = !_individualTimerObjEl.paused;
       return util.getState_replaceElByIndex(util.getCurrentIndex(), _individualTimerObjEl);
       
       case 'SET_TICKING_TRUE':
@@ -116,12 +116,12 @@ const reducer = function(state = [], action) {
 
       case 'SET_PAUSE_TRUE':
       _individualTimerObjEl = util.getCurrentObjEl();
-      _individualTimerObjEl.pause = true;
+      _individualTimerObjEl.paused = true;
       return util.getState_replaceElByIndex(util.getCurrentIndex(), _individualTimerObjEl);
 
       case 'SET_PAUSE_FALSE':
       _individualTimerObjEl = util.getCurrentObjEl();
-      _individualTimerObjEl.pause = false;
+      _individualTimerObjEl.paused = false;
       return util.getState_replaceElByIndex(util.getCurrentIndex(), _individualTimerObjEl);
 
 
