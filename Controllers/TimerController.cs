@@ -95,17 +95,21 @@ namespace PracticeTimer.Controllers
             return new ObjectResult(new { Success = true });
         }
 
-        // we want to create a new data 
-        // [HttpPost("{id:guid}")]
-        // public IActionResult Update([FromBody] RequestToCreateTimerDto dto)
-        // {
-        //     var entity = Context.Timers.First(t => t.Id == dto.);
+        [HttpPut()]
+        public IActionResult Update([FromBody] RequestToUpdateTimerDto dto)
+        {
+            var entity = Context.Timers.First(t => t.Id == dto.Id);
             
-        //     entity = toEntity(dto, entity);
-        //     Context.SaveChanges();
+            entity.Title = dto.Title;
+            entity.StartTime = dto.StartTime;
+            entity.Order = dto.Order;
+            entity.Paused = dto.Paused;
+            entity.Ticking = dto.Ticking;
 
-        //     return new ObjectResult(new { Success = true });
-        // }
+            Context.SaveChanges();
+
+            return new ObjectResult(new { Success = true });
+        }
    
     }
 }

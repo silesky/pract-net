@@ -6,6 +6,9 @@ namespace PracticeTimer.DataTransferObjects {
         public Guid Id {get;set;}
     }
 
+    public class RequestToUpdateTimerDto :BaseTimerDto {
+        public Guid Id {get;set;}
+    }
     public class RequestToCreateTimerDto : BaseTimerDto {
     }
     public abstract class BaseTimerDto {
