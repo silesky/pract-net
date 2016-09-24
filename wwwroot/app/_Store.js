@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
+import { debounce } from 'underscore';
 // stores the state... hydration happens in _Reducer
 import { storeStateInLS,getStateFromLS, get } from './util';
 
@@ -40,10 +41,41 @@ const configureStore = () => {
   };
 
 const store = configureStore();
-	
+
+const fetchPost = (route, data) => {
+    return fetch(route, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data)
+  })
+}
+
+
+const fetchPut = (route, data) => {
+    return fetch(route, {
+    method: 'PUT',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data)
+  })
+}
+
 // without anon function, I get error 'expected listener to be a function'
 store.subscribe(() => storeStateInLS(store.getState()));
 
+const debouncedUpdate = debounce(() => { 
+getStateFromLS().then(currentState => {
+    console.log(currentState);
+ currentState.map(timer => fetchPut('/api/timer', timer)
+ .then((res) => console.log(res))
+ )}, 2000);
+})
+
+
+store.subscribe(debouncedUpdate);
 
 getInitialState().then((state) => {
   console.log(state);
