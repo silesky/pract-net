@@ -17,13 +17,16 @@ import reducer from './reducers/_Reducer';
 *   let store= createStoreMW(todoApp)
 */
 
-const defaultState = [{ id: 1, time: 5, title: '', ticking: false, startTime: 5, paused: true }];
+const defaultState = [{ id: 1, time: 5, title: 'DEFAULTSTATE', ticking: false, startTime: 5, paused: true }];
 const getStateFromDB = () => get('/api/timer');
 
 const getInitialState = () => {
     return Promise.all([getStateFromDB(), getStateFromLS()]).then(([dbState, lsState]) => {
+      console.log('dbState', dbState);
       if (dbState) return dbState;
+      console.warn('lsState returned.')
       if (lsState) return lsState;
+      console.warn('defaultState returned.')
       return defaultState;
     });
   };
@@ -78,7 +81,7 @@ getStateFromLS().then(currentState => {
 store.subscribe(debouncedUpdate);
 
 getInitialState().then((state) => {
-  console.log(state);
+  console.log('getInitialState', state);
   store.dispatch({type: 'HYDRATE', data: state});
 })
 

@@ -59,6 +59,8 @@ const reducer = function(state = [], action) {
     };
     switch (action.type) {
       case 'HYDRATE':
+      // make time equal start time
+      console.log('store hydrated', action.data);
       return action.data; 
       
       case 'CLEAR':
