@@ -30,7 +30,7 @@ const Board = React.createClass({
     return !!findIdWhereTrue(this.props.state, 'paused');
   },
   render() {
-;
+
     return(
         <div>
         <header>
