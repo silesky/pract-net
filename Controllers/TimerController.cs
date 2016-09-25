@@ -101,10 +101,12 @@ namespace PracticeTimer.Controllers
             var entity = Context.Timers.First(t => t.Id == dto.Id);
             
             entity.Title = dto.Title;
+            entity.Time = dto.Time;
             entity.StartTime = dto.StartTime;
             entity.Order = dto.Order;
             entity.Paused = dto.Paused;
             entity.Ticking = dto.Ticking;
+        
 
             Context.SaveChanges();
 

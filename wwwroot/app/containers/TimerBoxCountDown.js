@@ -56,6 +56,7 @@ const TimerBoxCountDown = React.createClass({
                     time: totalTimeInSeconds,
                     id: this.props.eachKey,
                   });
+                  store.dispatch({type: 'SAVE_START_TIMES'});
                 } }>Set</button>
  
           </div>
