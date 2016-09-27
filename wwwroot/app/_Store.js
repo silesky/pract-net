@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { debounce } from 'underscore';
-import { storeStateInLS,getStateFromLS, get } from './util';
+import { storeStateInLS,getStateFromLS, get, fetchPut, fetchPost } from './util';
 import thunk from 'redux-thunk';
 import reducer from './reducers/_Reducer';
 
@@ -40,26 +40,7 @@ const configureStore = () => {
 
 const store = configureStore();
 
-const fetchPost = (route, data) => {
-    return fetch(route, {
-    method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: JSON.stringify(data)
-  })
-}
 
-
-const fetchPut = (route, data) => {
-    return fetch(route, {
-    method: 'PUT',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: JSON.stringify(data)
-  })
-}
 
 // without anon function, I get error 'expected listener to be a function'
 store.subscribe(() => storeStateInLS(store.getState()));

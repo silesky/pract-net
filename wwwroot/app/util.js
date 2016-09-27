@@ -1,5 +1,22 @@
+export const fetchPost = (route, data) => {
+    return fetch(route, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data)
+  })
+}
 
-// given the state and the current id, grab the next id;
+export const fetchPut = (route, data) => {
+    return fetch(route, {
+    method: 'PUT',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data)
+  })
+}
 
 export const get = (filepath) => {
   return new Promise((resolve, reject) => {
