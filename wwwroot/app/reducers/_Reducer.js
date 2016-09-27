@@ -1,6 +1,9 @@
 import {
-    isEmpty
+    isEmpty, fetchPost
 } from '../util';
+
+import { uuid } from 'node-uuid'; //https://github.com/broofa/node-uuid
+
 const reducer = function(state = [], action) {
     let _index;
     let _objEl;
@@ -47,8 +50,9 @@ const reducer = function(state = [], action) {
                 startTime: 5,
                 paused: true
             }];
-        case 'ADD_TIMER':
-            return [...state, {
+        case 'ADD_TIMER': {
+    
+            var newState = [...state, {
                 id: util.getNextId(),
                 time: 5,
                 title: '',
@@ -56,6 +60,9 @@ const reducer = function(state = [], action) {
                 startTime: 5,
                 paused: true
             }];
+
+            return newState;
+        }
         case 'SAVE_START_TIMES':
             console.log('saveStartTimes!')
             let stateWithSavedStartTimes = state.map((el) => {
