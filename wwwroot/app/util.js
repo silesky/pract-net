@@ -17,7 +17,12 @@ export const fetchPut = (route, data) => {
     body: JSON.stringify(data)
   })
 }
-
+export const uuid = () => {
+  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+  });
+}
 export const get = (filepath) => {
   return new Promise((resolve, reject) => {
   // new request object

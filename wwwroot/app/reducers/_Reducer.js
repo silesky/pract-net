@@ -1,8 +1,6 @@
-import {
-    isEmpty, fetchPost
-} from '../util';
-
-import { uuid } from 'node-uuid'; //https://github.com/broofa/node-uuid
+import { isEmpty, fetchPost, createUuid } from '../util';
+import { defaultState, defaultTimer } from '../_Store';
+import { uuid } from 'd'; //https://github.com/broofa/node-uuid
 
 const reducer = function(state = [], action) {
     let _index;
@@ -42,27 +40,10 @@ const reducer = function(state = [], action) {
             console.log('store hydrated', action.data);
             return action.data;
         case 'CLEAR':
-            return [{
-                id: util.getNextId(),
-                time: 5,
-                title: '',
-                ticking: false,
-                startTime: 5,
-                paused: true
-            }];
-        case 'ADD_TIMER': {
-    
-            var newState = [...state, {
-                id: util.getNextId(),
-                time: 5,
-                title: '',
-                ticking: false,
-                startTime: 5,
-                paused: true
-            }];
-
+            return defaultState;
+        case 'ADD_TIMER':
+            let newState = [...state, defaultTimer];
             return newState;
-        }
         case 'SAVE_START_TIMES':
             console.log('saveStartTimes!')
             let stateWithSavedStartTimes = state.map((el) => {

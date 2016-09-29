@@ -57,7 +57,8 @@ namespace PracticeTimer.Controllers
 
         private Timer toEntity(RequestToCreateTimerDto dto) {
             var entity = new Timer(){
-            Id = Guid.NewGuid(),
+            Id = dto.Id,
+            TimerGroupId = dto.TimerGroupId,
             Order = dto.Order,
             Paused = dto.Paused,
             Time = dto.Time,
