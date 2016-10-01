@@ -1,6 +1,5 @@
 import { isEmpty, fetchPost, createUuid } from '../util';
 import { defaultState, defaultTimer } from '../_Store';
-import { uuid } from 'd'; //https://github.com/broofa/node-uuid
 
 const reducer = function(state = [], action) {
     let _index;
@@ -48,7 +47,7 @@ const reducer = function(state = [], action) {
             console.log('saveStartTimes!')
             let stateWithSavedStartTimes = state.map((el) => {
                 // if the timer is paused, don't overwrit e the start time
-                // if timer has finished, don't overwrite the start time   
+                // if timer has finished, don't overwrite the start time
                 // not using ternary bc it's hard to debug in devtools.
                 if (!el.ticking && el.time !== 0) {
                     el.startTime = el.time;
