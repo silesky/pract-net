@@ -10,6 +10,7 @@ namespace PracticeTimer.DataTransferObjects {
         public Guid Id {get;set;}
     }
     public class RequestToCreateTimerDto : BaseTimerDto {
+        public Guid Id {get; set;}
     }
     public abstract class BaseTimerDto {
       
@@ -19,8 +20,9 @@ namespace PracticeTimer.DataTransferObjects {
         public int StartTime {get;set;}
         public bool Paused {get;set;}
         public int Order {get;set;}
-        
         public Guid TimerGroupId {get; set;}
+
+        
 
 
     

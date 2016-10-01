@@ -57,7 +57,8 @@ namespace PracticeTimer.Controllers
 
         private Timer toEntity(RequestToCreateTimerDto dto) {
             var entity = new Timer(){
-            Id = Guid.NewGuid(),
+            Id = dto.Id,
+            TimerGroupId = dto.TimerGroupId,
             Order = dto.Order,
             Paused = dto.Paused,
             Time = dto.Time,
@@ -69,19 +70,19 @@ namespace PracticeTimer.Controllers
             return entity;
         } 
 
-        [HttpPost("")]
+        [HttpPost()]
         public IActionResult Create([FromBody] RequestToCreateTimerDto dto)
         {
         
             // when you hit the put route, you get {success: true} if it suceeded
-            // http://localhost:5000/api/timer/f46020bc-e1c0-4225-a04f-20415156b3a5
+            // http://localhost:5000/api/timer/
             // private variables are camelCase
             var timerEntity = toEntity(dto);
             
             Context.Timers.Add(timerEntity);
             Context.SaveChanges();
             
-            return CreatedAtRoute("", new { sucess = true }, timerEntity);
+             return new ObjectResult(new { Success = true });
         }
 
         [HttpDelete("{id:guid}")]

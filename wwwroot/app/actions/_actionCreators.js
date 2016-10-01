@@ -6,9 +6,13 @@ export const _setTickingFalse = (id) => ({ type: 'SET_TICKING_FALSE', id });
 export const _setPausedTrue = (id) => ({ type: 'SET_PAUSE_TRUE', id });
 export const _setPausedFalse = (id) => ({ type: 'SET_PAUSE_FALSE', id });
 export const removeTimer = (id) => ({ type: 'REMOVE_TIMER', id });
-export const addTimer = () =>  ({ type: 'ADD_TIMER' });
-export const reset = (id) => ({ type: 'RESET', id });
 
+export const reset = (id) => ({ type: 'RESET', id });
+export const addTimer = () =>  {
+  return (dispatch) => {
+    dispatch({ type: 'ADD_TIMER' });
+  };
+};
 export const increment = (id) => ({ type: 'INCREMENT', id });
 export const decrement = (id) => ({ type: 'DECREMENT', id });
 export const setTitle = (text, id) => ({ type: 'SET_TITLE', text, id });

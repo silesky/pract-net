@@ -15,21 +15,20 @@ export const TimerBox = React.createClass({
   },
   render() {
     return (
-
       <div ref="timerBox" className={ `shadow timerBox ${(this.props.eachTicking) ? 'ticking' : ''}` } >
         <div className="topBar">
-                       <TimerBoxTitle
-              onTimerBoxTitleSet={ (titleSetInput) => {
-                let text = titleSetInput.value;
-                this.props.actions.setTitle(text, this.props.eachKey);
-                }
+          <TimerBoxTitle
+            onTimerBoxTitleSet={ (titleSetInput) => {
+              let text = titleSetInput.value;
+              this.props.actions.setTitle(text, this.props.eachKey);
               }
-              eachKey={ this.props.eachKey }
-              eachTitle={ this.props.eachTitle }
-            />
-            <TimerBoxBtnClose
-              onTimerBoxBtnCloseClick={ () => this.props.actions.removeTimer(this.props.eachKey) }
-              />
+            }
+            eachKey={ this.props.eachKey }
+            eachTitle={ this.props.eachTitle }
+        />
+        <TimerBoxBtnClose
+          onTimerBoxBtnCloseClick={ () => this.props.actions.removeTimer(this.props.eachKey) }
+        />
 
 
         </div>
@@ -38,7 +37,7 @@ export const TimerBox = React.createClass({
           <TimerBoxCountDown
             eachKey={ this.props.eachKey }
             eachTime={ this.props.eachTime }
-            eachTicking = { this.props.eachTicking }
+            eachTicking={ this.props.eachTicking }
             />
          </div> 
       </div>

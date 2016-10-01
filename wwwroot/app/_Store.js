@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import { debounce } from 'underscore';
-import { storeStateInLS,getStateFromLS, get } from './util';
 import thunk from 'redux-thunk';
+
+import { storeStateInLS,getStateFromLS, get, fetchPut, fetchPost, uuid } from './util';
 import reducer from './reducers/_Reducer';
 
 // middleware - the functions that intercept an action upon dispatch, before it reaches the reducer
@@ -12,8 +13,10 @@ import reducer from './reducers/_Reducer';
 *   todoApp = combineReducers(reducers)
 *   let store= createStoreMW(todoApp)
 */
+console.log(uuid());
+export const defaultTimer = {id: uuid(), timerGroupId: uuid(), title: 'DEFAULTSTATE', ticking: false, time: 5, startTime: 5, paused: true}
+export const defaultState = [...defaultTimer];
 
-const defaultState = [{ id: 1, time: 5, title: 'DEFAULTSTATE', ticking: false, startTime: 5, paused: true }];
 const getStateFromDB = () => get('/api/timer');
 const getInitialState = () => {
     return Promise.all([getStateFromDB(), getStateFromLS()]).then(([dbState, lsState]) => {
@@ -40,26 +43,18 @@ const configureStore = () => {
 
 const store = configureStore();
 
-const fetchPost = (route, data) => {
-    return fetch(route, {
-    method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: JSON.stringify(data)
-  })
-}
 
-
-const fetchPut = (route, data) => {
-    return fetch(route, {
-    method: 'PUT',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: JSON.stringify(data)
-  })
-}
+     /* this will only work if postman works... I should be able to add this in the body
+        /*	{
+          "title": "POSTED!",
+          "time": 666,
+          "ticking": false,
+          "startTime": 20,
+          "paused": true,
+          "order": 5,
+          "timerGroupId": "80d7131d-a862-4fd1-958d-3b8ac62980ba"
+          }
+        */
 
 // without anon function, I get error 'expected listener to be a function'
 store.subscribe(() => storeStateInLS(store.getState()));
@@ -68,7 +63,11 @@ store.subscribe(() => storeStateInLS(store.getState()));
 const debouncedUpdate = debounce(() => { 
   getStateFromLS().then(currentState => {
       console.log('currentState', currentState);
-      currentState.map(timer => fetchPut('/api/timer', timer)
+      // for each new timer, do a post
+      currentState.map(timer =>
+      // if existing, do a put 
+      fetchPut('/api/timer', timer)
+   
         .then((res) => console.log('debounced update!', res))
   )}, 3000);
 })
