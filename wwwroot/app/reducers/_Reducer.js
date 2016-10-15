@@ -1,6 +1,5 @@
-import { isEmpty, fetchPost, createUuid } from '../util';
-import { defaultState, defaultTimer } from '../_Store';
-import { uuid } from 'd'; //https://github.com/broofa/node-uuid
+import { isEmpty, fetchPost, uuid } from '../util';
+import { defaultTimer } from '../_Store';
 
 const reducer = function(state = [], action) {
     let _index;
@@ -34,21 +33,24 @@ const reducer = function(state = [], action) {
             }
             return nextId;
         },
+        getExistingTimerGroupId: () => {
+            return state.map(el => el.timerGroupId)[0]
+        }
     };
     switch (action.type) {
         case 'HYDRATE':
             console.log('store hydrated', action.data);
             return action.data;
         case 'CLEAR':
-            return defaultState;
+            return [defaultTimer];
         case 'ADD_TIMER':
-            let newState = [...state, defaultTimer];
-            return newState;
+            
+          return [...state, defaultTimer(util.getNextId(), undefined, util.getExistingTimerGroupId)];
         case 'SAVE_START_TIMES':
             console.log('saveStartTimes!')
             let stateWithSavedStartTimes = state.map((el) => {
                 // if the timer is paused, don't overwrit e the start time
-                // if timer has finished, don't overwrite the start time   
+                // if timer has finished, don't overwrite the start time
                 // not using ternary bc it's hard to debug in devtools.
                 if (!el.ticking && el.time !== 0) {
                     el.startTime = el.time;

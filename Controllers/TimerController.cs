@@ -64,7 +64,7 @@ namespace PracticeTimer.Controllers
             Time = dto.Time,
             Ticking = dto.Ticking,
             Title = dto.Title,
-            TimerGroup = Context.TimerGroups.FirstOrDefault(tg => tg.Id == dto.TimerGroupId),
+            TimerGroup = Context.TimerGroups.First(tg => tg.Id == dto.TimerGroupId),
             StartTime = dto.StartTime
             }; 
             return entity;
