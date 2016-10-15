@@ -44,8 +44,12 @@ const reducer = function(state = [], action) {
         case 'CLEAR':
             return [defaultTimer];
         case 'ADD_TIMER':
-            
-          return [...state, defaultTimer(util.getNextId(), undefined, util.getExistingTimerGroupId)];
+            const newTimer = defaultTimer(util.getNextId(), undefined, util.getExistingTimerGroupId);
+            fetchPost('/api/timer', newTimer).then((res, err) => {
+                if (res) console.log("fetchPost", res);
+                if (err) console.error("fetchPost err", err);
+            })
+            return [...state, newTimer];
         case 'SAVE_START_TIMES':
             console.log('saveStartTimes!')
             let stateWithSavedStartTimes = state.map((el) => {

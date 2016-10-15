@@ -56,6 +56,7 @@ namespace PracticeTimer.Controllers
         // TimerDto is found in the bottom of the http request
 
         private Timer toEntity(RequestToCreateTimerDto dto) {
+
             var entity = new Timer(){
             Id = dto.Id,
             TimerGroupId = dto.TimerGroupId,
@@ -73,7 +74,7 @@ namespace PracticeTimer.Controllers
         [HttpPost()]
         public IActionResult Create([FromBody] RequestToCreateTimerDto dto)
         {
-        
+                Console.WriteLine("### hit Create!");
             // when you hit the put route, you get {success: true} if it suceeded
             // http://localhost:5000/api/timer/
             // private variables are camelCase
