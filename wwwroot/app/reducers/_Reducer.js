@@ -45,7 +45,7 @@ const reducer = function(state = [], action) {
             return [defaultTimer];
         case 'ADD_TIMER':
             
-          return [...state, defaultTimer(util.getNextId(), undefined, util.getExistingTimerGroupId)];
+          return [...state, action.data];
         case 'SAVE_START_TIMES':
             console.log('saveStartTimes!')
             let stateWithSavedStartTimes = state.map((el) => {

@@ -82,7 +82,6 @@ const debouncedUpdate = debounce(() => {
     currentState.map(timer =>
       // if existing, do a put 
       fetchPut('/api/timer', timer)
-
         .then((res) => console.log('debounced update!', res))
     )
   }, 3000);

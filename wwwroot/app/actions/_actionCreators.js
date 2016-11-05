@@ -1,16 +1,38 @@
-import { nextInLine, findIdWhereTrue, everythingIsPaused } from '../util.js';
+import { 
+    nextInLine,
+    findIdWhereTrue,
+    everythingIsPaused,
+    fetchPost,
+    fetchDelete,
+    getExistingTimerGroupId,
+    getNextId, 
+    defaultTimer
+  } from '../util.js';
+
 
 export const _saveStartTimes = () => ({ type: 'SAVE_START_TIMES' });
 export const _setTickingTrue = (id) => ({ type: 'SET_TICKING_TRUE', id });
 export const _setTickingFalse = (id) => ({ type: 'SET_TICKING_FALSE', id });
 export const _setPausedTrue = (id) => ({ type: 'SET_PAUSE_TRUE', id });
 export const _setPausedFalse = (id) => ({ type: 'SET_PAUSE_FALSE', id });
-export const removeTimer = (id) => ({ type: 'REMOVE_TIMER', id });
+// export const removeTimer = (id) => ({ type: 'REMOVE_TIMER', id });
+export const removeTimer = (id) => {
+  return (dispatch, getState) => {
+    console.warn(id);
+    dispatch({ type: 'REMOVE_TIMER', id });
+    fetchDelete(id)
+      .then(r => console.log(r))
+      .catch(err => console.error(err));
+  };
+};
+
 
 export const reset = (id) => ({ type: 'RESET', id });
-export const addTimer = () =>  {
-  return (dispatch) => {
-    dispatch({ type: 'ADD_TIMER' });
+export const addTimer = (timer) =>  {
+  return (dispatch, getState) => {
+    const newTimer = defaultTimer(getNextId(getState()), undefined, getExistingTimerGroupId(getState()));
+    dispatch({ type: 'ADD_TIMER', data: newTimer });
+    fetchPost("/api/timer", newTimer);
   };
 };
 export const increment = (id) => ({ type: 'INCREMENT', id });

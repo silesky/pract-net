@@ -17,8 +17,35 @@ export const fetchPut = (route, data) => {
     body: JSON.stringify(data)
   })
 }
+
+
+
+export const getNextId = (state) => {
+  let nextId;
+  let idArr = state.map(el => el.id);
+  if (isEmpty(idArr)) {
+    nextId = 1;
+  } else {
+    /* TIL Math.max of an empty array returns negative infinity, which is passes the null check */
+    nextId = Math.max(...idArr) + 1;
+  }
+  return nextId;
+}
+
+export const getExistingTimerGroupId = (state) => {
+  return state.map(el => el.timerGroupId)[0]
+}
+
+export const fetchDelete = (id) => fetch(`/api/timer/${id}`, {
+  method: "DELETE",
+  headers: new Headers({
+    "Content-Type": "application/json",
+  }),
+})
+
+
 export const uuid = () => {
-  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
       return v.toString(16);
   });
@@ -47,6 +74,16 @@ export const get = (filepath) => {
     });
  }
  
+export const defaultTimer = (order = 1, id = uuid(), timerGroupId = 'f7492212-1e19-4a15-8e5c-1c2652f51d00') => ({
+  order,
+  id,
+  timerGroupId,  //this guid changes on every seed
+  title: 'DEFAULTSTATE',
+  ticking: false,
+  time: 5,
+  startTime: 5,
+  paused: true
+})
 
 export const storeStateInLS = (obj) => {
   if (typeof obj === 'object' || 'array') {
