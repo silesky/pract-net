@@ -31,10 +31,32 @@ export const getNextId = (state) => {
   }
   return nextId;
 }
+export const getNextOrderNum = (state) => {
+  let nextOrderNum;
+  const orderArr =  state.map(el => el.order)
+  if (isEmpty(orderArr))    {
+    nextOrderNum = 1
+  }
+  else {
+    nextOrderNum = Math.max(...orderArr) + 1;
+  }
+  return nextOrderNum;
+}
 
 export const getExistingTimerGroupId = (state) => {
   return state.map(el => el.timerGroupId)[0]
 }
+// default TimerId sucks
+export const defaultTimer = (state) => ({
+  order: getNextOrderNum(state),
+  id: uuid(),
+  timerGroupId: getExistingTimerGroupId(state),  //this guid changes on every seed
+  title: 'DEFAULTSTATE',
+  ticking: false,
+  time: 5,
+  startTime: 5,
+  paused: true
+})
 
 export const fetchDelete = (id) => fetch(`/api/timer/${id}`, {
   method: "DELETE",
@@ -74,16 +96,7 @@ export const get = (filepath) => {
     });
  }
  
-export const defaultTimer = (order = 1, id = uuid(), timerGroupId = 'f7492212-1e19-4a15-8e5c-1c2652f51d00') => ({
-  order,
-  id,
-  timerGroupId,  //this guid changes on every seed
-  title: 'DEFAULTSTATE',
-  ticking: false,
-  time: 5,
-  startTime: 5,
-  paused: true
-})
+
 
 export const storeStateInLS = (obj) => {
   if (typeof obj === 'object' || 'array') {

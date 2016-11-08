@@ -4,8 +4,6 @@ import {
     everythingIsPaused,
     fetchPost,
     fetchDelete,
-    getExistingTimerGroupId,
-    getNextId, 
     defaultTimer
   } from '../util.js';
 
@@ -28,11 +26,13 @@ export const removeTimer = (id) => {
 
 
 export const reset = (id) => ({ type: 'RESET', id });
-export const addTimer = (timer) =>  {
+export const addTimer = () =>  {
   return (dispatch, getState) => {
-    const newTimer = defaultTimer(getNextId(getState()), undefined, getExistingTimerGroupId(getState()));
+
+    const newTimer = defaultTimer(getState());
+    console.log(newTimer);
     dispatch({ type: 'ADD_TIMER', data: newTimer });
-    fetchPost("/api/timer", newTimer);
+    fetchPost("/api/timer", newTimer).then((res, err) => { if (err) throw Error });
   };
 };
 export const increment = (id) => ({ type: 'INCREMENT', id });
